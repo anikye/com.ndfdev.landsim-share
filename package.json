@@ -1,19 +1,22 @@
 {
-  "name": "com.ndfdev.landsim-share",
-  "version": "0.1.0",
-  "displayName": "Landsim Share System",
-  "description": "share scripts.",
-  "unity": "2021.3",
-  "unityRelease": "1f1",
-  "documentationUrl": "https://github.com/anikye/com.ndfdev.landsim-share",
-  "changelogUrl": "https://github.com/anikye/com.ndfdev.landsim-share",
-  "keywords": [
-    "landsim",
-    "share"
-  ],
-  "author": {
-    "name": "Nik",
-    "email": "wisitnik@gmail.com"
-  },
-  "hideInEditor": false
+    "name": "com.ndfdev.landsim-share",
+    "version": "0.2.0",
+    "displayName": "Landsim Share System",
+    "description": "share scripts.",
+    "unity": "2021.3",
+    "unityRelease": "1f1",
+    "documentationUrl": "https://github.com/anikye/com.ndfdev.landsim-share",
+    "changelogUrl": "https://github.com/anikye/com.ndfdev.landsim-share",
+    "dependencies": {
+        "com.unity.addressables": "1.19.19"
+    },
+    "keywords": [
+        "landsim",
+        "share"
+    ],
+    "author": {
+        "name": "Nik",
+        "email": "wisitnik@gmail.com"
+    },
+    "hideInEditor": false
 }

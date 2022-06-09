@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PostCatalog : MonoBehaviour
 {
@@ -14,12 +17,12 @@ public class PostCatalog : MonoBehaviour
     public Platform platform = Platform.WEBGL;
     public string tagId;
     public string[] catalogs;
-    public string[] scenes;
-    
+    //public string[] scenes;
+    public AssetReference[] scenes;
 
     void Start()
     {
-
+        StartCoroutine(Post());
     }
 
     public IEnumerator Post()
@@ -27,10 +30,10 @@ public class PostCatalog : MonoBehaviour
         // post to firebase postcatalog
 
         var cm = new CatalogMeta();
-        cm.Set(this);
+        yield return StartCoroutine(cm.Set(this));
         // then post
 
-        var www = new UnityWebRequest(url, "POST");
+        var www = new UnityWebRequest(url + "?t=" + tagId, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(cm));
         www.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -47,12 +50,20 @@ public class PostCatalog : MonoBehaviour
         public string[] catalogs;
         public string[] scenes;
 
-        public void Set(PostCatalog data)
+        public IEnumerator Set(PostCatalog data)
         {
             platform = data.platform.ToString();
             t = data.tagId;
             catalogs = data.catalogs;
-            scenes = data.scenes;
+
+            var is_done = false;
+            Addressables.LoadResourceLocationsAsync(scenes, Addressables.MergeMode.UseFirst).Completed += (result) =>
+            {
+                scenes = result.Result.Select(x => x.PrimaryKey).ToArray();
+                is_done = true;
+            };
+
+            yield return new WaitUntil(() => is_done);
         }
     }
 
