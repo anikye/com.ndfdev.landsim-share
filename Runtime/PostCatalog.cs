@@ -14,6 +14,15 @@ public class PostCatalog : MonoBehaviour
     public string tagId;
     public string[] catalogs;
     public string[] scenes;
+    public Group[] groups;
+
+    [System.Serializable]
+    public class Group
+    {
+        public Vector2Int spawnAt;
+        public string scene;
+        public Vector2Int[] lands;
+    }
 
     void Start()
     {
@@ -41,6 +50,7 @@ public class PostCatalog : MonoBehaviour
         public string t;
         public string[] catalogs;
         public string[] scenes;
+        public Group[] groups;
 
         public IEnumerator Set(PostCatalog data)
         {
@@ -48,6 +58,8 @@ public class PostCatalog : MonoBehaviour
             t = data.tagId;
             catalogs = data.catalogs;
             scenes = data.scenes;
+            groups = data.groups;
+
             yield return null;
 
             //var is_done = false;
