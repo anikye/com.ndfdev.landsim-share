@@ -8,7 +8,7 @@ public class RootScene : MonoBehaviour
 
     void Start()
     {
-        
+        transform.position = new Vector3(x, 0, z) * 40f;
     }
 
 }
