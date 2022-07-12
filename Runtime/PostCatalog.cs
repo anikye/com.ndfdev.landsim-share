@@ -37,16 +37,21 @@ public class PostCatalog : MonoBehaviour
 
     public IEnumerator Post()
     {
-        var cm = new CatalogMeta();
-        cm.Set(this);
+#if UNITY_EDITOR
+
+        var meta = new CatalogMeta();
+        meta.Set(this);
 
         var www = new UnityWebRequest(endpoint + "postcatalog?t=" + tagId, "POST");
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(cm));
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(meta));
         www.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
         Debug.Log(www.downloadHandler.text);
+#else
+        yield return null;
+#endif
     }
 
     [System.Serializable]
