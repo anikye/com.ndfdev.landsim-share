@@ -27,7 +27,7 @@ public class PostCatalog : MonoBehaviour
     }
     public Platform platform = Platform.WEBGL;
     public string tagId;
-    public string catalogURL;
+    public string catalogJsonURL;
     public AssetReference[] scenes;
 
     void Start()
@@ -62,7 +62,7 @@ public class PostCatalog : MonoBehaviour
 #if UNITY_EDITOR
             platform = data.platform.ToString();
             t = data.tagId;
-            catalog = data.catalogURL;
+            catalog = data.catalogJsonURL;
             scenes = data.scenes.Select(x => x.editorAsset.ToString()).ToArray();
 
 #endif
