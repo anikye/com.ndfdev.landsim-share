@@ -62,8 +62,8 @@ public class PackSceneAddressable : MonoBehaviour
                     Debug.Log("asset: " + dict[guid]);
                     var go = new GameObject(dict[guid]);
                     go.tag = "asset";
-                    go.transform.position = item.position;
-                    go.transform.rotation = item.rotation;
+                    go.transform.localPosition = item.localPosition;
+                    go.transform.localRotation = item.localRotation;
                     go.transform.SetParent(root.transform);
 
                     // set trigger
