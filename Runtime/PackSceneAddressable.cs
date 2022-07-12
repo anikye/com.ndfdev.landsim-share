@@ -13,6 +13,7 @@ public class PackSceneAddressable : MonoBehaviour
     public string RemoteName = "Remote";
     public bool useXZ;
     public int x, z;
+    public bool replaceOldPacked;
 
     [ContextMenu("Pack")]
     void pack()
@@ -44,10 +45,19 @@ public class PackSceneAddressable : MonoBehaviour
         //Debug.Log("IN SCENE");
 
         var scene = SceneManager.GetActiveScene();
-        var root = new GameObject(scene.name);
-
+        var _name = scene.name;
         if (useXZ)
-            root.name = "SCENE" + x + "_" + z;
+            _name = "SCENE" + x + "_" + z;
+        if (replaceOldPacked)
+        {
+            var old = GameObject.Find(_name);
+            if (old)
+            {
+                GameObject.DestroyImmediate(old);
+            }
+        }
+
+        var root = new GameObject(_name);
 
         foreach (var item in roots)
         {

@@ -1,6 +1,6 @@
 {
     "name": "com.ndfdev.landsim-share",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "displayName": "Landsim Share System",
     "description": "share scripts.",
     "unity": "2021.3",
