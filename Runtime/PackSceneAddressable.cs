@@ -14,8 +14,8 @@ public class PackSceneAddressable : MonoBehaviour
     public bool useXZ;
     public int x, z;
 
-    [ContextMenu("test")]
-    void Test()
+    [ContextMenu("Pack")]
+    void pack()
     {
         var groups = AddressableAssetSettingsDefaultObject.Settings.groups;
         var dict = new Dictionary<string, string>();
@@ -34,8 +34,13 @@ public class PackSceneAddressable : MonoBehaviour
             }
         }
 
-        var all = GameObject.FindObjectsOfType<Transform>();
-        var roots = all.Where(x => x.parent == null);
+        var roots = new List<Transform>();
+        foreach (Transform child in transform)
+        {
+            roots.Add(child);
+        }
+        //var all = GameObject.FindObjectsOfType<Transform>();
+        //var roots = all.Where(x => x.parent == null);
         //Debug.Log("IN SCENE");
 
         var scene = SceneManager.GetActiveScene();
@@ -91,26 +96,6 @@ public class PackSceneAddressable : MonoBehaviour
                     }
                 }
             }
-        }
-    }
-
-    public AssetReference test;
-
-    [ContextMenu("test 2")]
-    void Test2()
-    {
-
-        Debug.Log(test.editorAsset.name);
-        Debug.Log(test.AssetGUID);
-
-        var groups = AddressableAssetSettingsDefaultObject.Settings.groups;
-        foreach (var group in groups)
-        {
-            foreach (var item in group.entries)
-            {
-                Debug.Log(item.address + ": " + item.guid);
-            }
-
         }
     }
 }
