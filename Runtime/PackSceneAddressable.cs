@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEditor;
-using System.Linq;
+//using UnityEngine.AddressableAssets;
+//using System.Linq;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.AddressableAssets;
+#endif
 
 public class PackSceneAddressable : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class PackSceneAddressable : MonoBehaviour
     [ContextMenu("Pack")]
     void pack()
     {
+#if UNITY_EDITOR
         var groups = AddressableAssetSettingsDefaultObject.Settings.groups;
         var dict = new Dictionary<string, string>();
         var dict_lod = new Dictionary<string, bool>();
@@ -107,5 +110,6 @@ public class PackSceneAddressable : MonoBehaviour
                 }
             }
         }
+#endif
     }
 }
